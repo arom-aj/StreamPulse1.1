@@ -1,10 +1,6 @@
 import React from 'react';
 import { 
-  Check, 
-  Layers, 
-  SearchX,
-  SlidersHorizontal,
-  ArrowUpDown
+  SearchX 
 } from 'lucide-react';
 import { FeedItem, Source, PlatformSlug, DashboardWidget } from '../types';
 import { WidgetCard } from './WidgetCard';
@@ -16,6 +12,8 @@ interface DesktopBunkerProps {
   selectedPlatform: PlatformSlug | 'all';
   searchQuery: string;
   columns: number;
+  density?: 'comfortable' | 'compact';
+  activeItemId?: string;
   onPlayPiP: (item: FeedItem) => void;
   onOpenReader: (item: FeedItem) => void;
   onToggleBookmark: (id: string) => void;
@@ -23,7 +21,7 @@ interface DesktopBunkerProps {
   onMarkAllRead: () => void;
   onRefreshSource: (sourceId: string) => void;
   isSyncing: boolean;
-  latestIngestedItem: FeedItem | null;
+  latestIngestedItem?: FeedItem | null;
 }
 
 export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
@@ -33,6 +31,8 @@ export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
   selectedPlatform,
   searchQuery,
   columns,
+  density = 'comfortable',
+  activeItemId,
   onPlayPiP,
   onOpenReader,
   onToggleBookmark,
@@ -40,7 +40,6 @@ export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
   onMarkAllRead,
   onRefreshSource,
   isSyncing,
-  latestIngestedItem,
 }) => {
   const filteredItems = items.filter((item) => {
     const matchesSearch = searchQuery === '' || 
@@ -62,54 +61,50 @@ export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
     4: 'grid-cols-1 md:grid-cols-2 xl:grid-cols-4',
   }[columns] || 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3';
 
+  // Filter widgets by selectedPlatform tab (enfoque directo al widget correspondiente)
   const visibleWidgets = widgets.filter(w => {
     if (!w.isVisible) return false;
     if (selectedPlatform === 'all') return true;
     return w.platform === selectedPlatform;
   });
 
-  return (
-    <div className="max-w-[1600px] mx-auto px-3.5 sm:px-6 py-4 sm:py-6 space-y-4">
-      {/* Quiet Status & Non-intrusive Live Notice Strip */}
-      <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted border-b border-subtle pb-3">
-        {/* Left: Gentle real-time notice without jumping */}
-        <div className="flex items-center gap-2">
-          {latestIngestedItem ? (
-            <div className="flex items-center gap-2 text-secondary animate-fadeIn">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-              <span className="font-mono text-[11px] text-muted">Reciente:</span>
-              <span className="truncate max-w-sm sm:max-w-md font-medium text-primary">
-                {latestIngestedItem.title}
-              </span>
-            </div>
-          ) : (
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-muted/60" />
-              <span>Conexión de feeds al día</span>
-            </div>
-          )}
-        </div>
+  // Calculate focal anchor widget (content EN VIVO gets highest priority, then highest unread count)
+  const focalWidgetId = visibleWidgets.reduce<{ id: string; score: number }>((best, w) => {
+    const wItems = filteredItems.filter(item => !w.platform || item.platform === w.platform);
+    const hasLive = wItems.some(i => Boolean(i.metrics?.liveViewers));
+    const unreadCount = wItems.filter(i => !i.isRead).length;
+    const score = (hasLive ? 100 : 0) + unreadCount * 10;
+    if (score > best.score) {
+      return { id: w.id, score };
+    }
+    return best;
+  }, { id: visibleWidgets[0]?.id || '', score: -1 }).id;
 
-        {/* Right: Unboxed Counts & Mark Read Action */}
-        <div className="flex items-center gap-3 font-mono text-[11px]">
-          <span>{sources.length} canales</span>
-          <span className="text-muted/40">·</span>
-          <span>
-            {totalUnread > 0 ? (
-              <span className="text-primary font-medium">{totalUnread} sin leer</span>
-            ) : (
-              <span>Al día</span>
-            )}
-          </span>
+  // Reorder so focal widget is placed first when in "all" view, preventing layout holes
+  const arrangedWidgets = React.useMemo(() => {
+    if (selectedPlatform !== 'all' || visibleWidgets.length <= 1) {
+      return visibleWidgets;
+    }
+    const focal = visibleWidgets.find(w => w.id === focalWidgetId);
+    if (!focal) return visibleWidgets;
+    const rest = visibleWidgets.filter(w => w.id !== focalWidgetId);
+    return [focal, ...rest];
+  }, [visibleWidgets, focalWidgetId, selectedPlatform]);
+
+  return (
+    <div className="max-w-[1600px] mx-auto px-3.5 sm:px-6 py-4 space-y-3.5">
+      {/* Discreet single status line: N sin leer · N guardados · Marcar leídos (sin franja Reciente) */}
+      <div className="flex items-center justify-between text-xs text-muted border-b border-subtle pb-2.5 font-mono text-[11px] select-none">
+        <div className="flex items-center gap-2">
+          <span>{totalUnread > 0 ? `${totalUnread} sin leer` : 'Al día'}</span>
           <span className="text-muted/40">·</span>
           <span>{totalBookmarked} guardados</span>
-
           {totalUnread > 0 && (
             <>
               <span className="text-muted/40">·</span>
               <button
                 onClick={onMarkAllRead}
-                className="hover:text-primary transition-smooth text-accent underline underline-offset-4 cursor-pointer"
+                className="text-muted hover:text-secondary hover:underline transition-smooth cursor-pointer outline-none"
                 title="Marcar todas como leídas (R)"
               >
                 Marcar leídos
@@ -117,40 +112,57 @@ export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
             </>
           )}
         </div>
+
+        <div className="hidden sm:flex items-center gap-2 text-muted/70 text-[10px]">
+          <span>J/K navegar · Enter abrir · S sincronizar</span>
+        </div>
       </div>
 
-      {/* Grid of Feed Cards */}
-      <div className={`grid ${gridColsClass} gap-4 sm:gap-5`}>
-        {visibleWidgets.map((widget) => {
+      {/* Grid of Modular Widgets with Focal Anchor & Dense Flow to eliminate gaps */}
+      <div 
+        className={
+          selectedPlatform !== 'all'
+            ? 'max-w-4xl mx-auto'
+            : `grid ${gridColsClass} gap-3.5 sm:gap-4.5 grid-flow-dense`
+        }
+      >
+        {arrangedWidgets.map((widget) => {
           const widgetItems = filteredItems.filter(item => {
             if (widget.platform) return item.platform === widget.platform;
             return true;
           });
 
           const matchedSource = sources.find(s => s.platformId === widget.platform);
+          const isFocal = widget.id === focalWidgetId && columns >= 3 && arrangedWidgets.length > 2 && selectedPlatform === 'all';
 
           return (
-            <WidgetCard
-              key={widget.id}
-              title={widget.title}
-              platform={widget.platform || 'rss'}
-              source={matchedSource}
-              items={widgetItems}
-              onPlayPiP={onPlayPiP}
-              onOpenReader={onOpenReader}
-              onToggleBookmark={onToggleBookmark}
-              onToggleRead={onToggleRead}
-              onRefreshSource={matchedSource ? () => onRefreshSource(matchedSource.id) : undefined}
-              isSyncing={isSyncing}
-            />
+            <div 
+              key={widget.id} 
+              className={isFocal ? 'col-span-1 md:col-span-2' : 'col-span-1'}
+            >
+              <WidgetCard
+                title={widget.title}
+                platform={widget.platform || 'rss'}
+                source={matchedSource}
+                items={widgetItems}
+                activeItemId={activeItemId}
+                density={density}
+                onPlayPiP={onPlayPiP}
+                onOpenReader={onOpenReader}
+                onToggleBookmark={onToggleBookmark}
+                onToggleRead={onToggleRead}
+                onRefreshSource={matchedSource ? () => onRefreshSource(matchedSource.id) : undefined}
+                isSyncing={isSyncing}
+              />
+            </div>
           );
         })}
       </div>
 
       {/* Clean Empty State */}
-      {visibleWidgets.length > 0 && filteredItems.length === 0 && (
-        <div className="py-20 text-center flex flex-col items-center justify-center bg-surface border border-subtle rounded-xl p-8 max-w-md mx-auto">
-          <div className="w-10 h-10 rounded-lg bg-surface-elevated border border-subtle flex items-center justify-center text-muted mb-3">
+      {arrangedWidgets.length > 0 && filteredItems.length === 0 && (
+        <div className="py-20 text-center flex flex-col items-center justify-center bg-surface border border-subtle/40 rounded-[10px] p-8 max-w-md mx-auto">
+          <div className="w-10 h-10 rounded-[8px] bg-surface-elevated border border-subtle flex items-center justify-center text-muted mb-3">
             <SearchX className="w-5 h-5 stroke-[1.5]" />
           </div>
           <h3 className="text-sm font-semibold text-primary">
@@ -162,15 +174,17 @@ export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
         </div>
       )}
 
-      {/* Subtle Bottom Navigation Hints */}
-      <div className="pt-6 pb-2 text-center text-[11px] font-mono text-muted flex items-center justify-center gap-4">
-        <span><kbd className="kbd-tag">S</kbd> sincronizar</span>
+      {/* Footnote Shortcuts Bar preserved at the bottom */}
+      <div className="pt-6 pb-2 text-center text-[11px] font-mono text-muted flex items-center justify-center gap-3 sm:gap-4 select-none">
+        <span><kbd className="kbd-tag">J/K</kbd> navegar</span>
         <span>·</span>
-        <span><kbd className="kbd-tag">R</kbd> marcar leídos</span>
+        <span><kbd className="kbd-tag">↵</kbd> abrir</span>
+        <span>·</span>
+        <span><kbd className="kbd-tag">S</kbd> sync</span>
+        <span>·</span>
+        <span><kbd className="kbd-tag">R</kbd> leer</span>
         <span>·</span>
         <span><kbd className="kbd-tag">⌘K</kbd> buscar</span>
-        <span>·</span>
-        <span><kbd className="kbd-tag">?</kbd> atajos</span>
       </div>
     </div>
   );

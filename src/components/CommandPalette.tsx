@@ -64,14 +64,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   // Filter actions and items
   const actions = [
-    { id: 'act-add-video', title: 'Agregar Video o Canal (YouTube / Twitch / RSS)', code: 'ADD', action: () => { onOpenAddSource?.(); onClose(); } },
-    { id: 'act-sync', title: 'Sincronizar feeds ahora', code: 'SYNC', action: () => { onSync(); onClose(); } },
-    { id: 'act-all', title: 'Ver todas las publicaciones', code: 'ALL', action: () => { onSelectPlatform('all'); onClose(); } },
-    { id: 'act-yt', title: 'Filtrar por YouTube', code: 'YT', action: () => { onSelectPlatform('youtube'); onClose(); } },
-    { id: 'act-rss', title: 'Filtrar por Artículos y RSS', code: 'RSS', action: () => { onSelectPlatform('rss'); onClose(); } },
-    { id: 'act-reddit', title: 'Filtrar por Reddit', code: 'RD', action: () => { onSelectPlatform('reddit'); onClose(); } },
-    { id: 'act-gh', title: 'Filtrar por GitHub Trending', code: 'GH', action: () => { onSelectPlatform('github'); onClose(); } },
-    { id: 'act-twitch', title: 'Filtrar por Twitch Streams', code: 'TV', action: () => { onSelectPlatform('twitch'); onClose(); } },
+    { id: 'act-add-video', title: 'Agregar Video o Canal (YouTube / Twitch / RSS)', action: () => { onOpenAddSource?.(); onClose(); } },
+    { id: 'act-sync', title: 'Sincronizar feeds ahora', action: () => { onSync(); onClose(); } },
+    { id: 'act-all', title: 'Ver todas las publicaciones', action: () => { onSelectPlatform('all'); onClose(); } },
+    { id: 'act-yt', title: 'Filtrar por YouTube', action: () => { onSelectPlatform('youtube'); onClose(); } },
+    { id: 'act-rss', title: 'Filtrar por Artículos y RSS', action: () => { onSelectPlatform('rss'); onClose(); } },
+    { id: 'act-reddit', title: 'Filtrar por Reddit', action: () => { onSelectPlatform('reddit'); onClose(); } },
+    { id: 'act-gh', title: 'Filtrar por GitHub Trending', action: () => { onSelectPlatform('github'); onClose(); } },
+    { id: 'act-twitch', title: 'Filtrar por Twitch Streams', action: () => { onSelectPlatform('twitch'); onClose(); } },
   ];
 
   const matchedActions = actions.filter(a => a.title.toLowerCase().includes(query.toLowerCase()));
@@ -163,9 +163,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     }`}
                   >
                     <div className="flex items-center gap-2.5 truncate">
-                      <span className="font-mono text-[10px] text-muted uppercase px-1.5 py-0.5 rounded bg-surface border border-subtle">
-                        {act.code}
-                      </span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-secondary/40 shrink-0" />
                       <span className="font-medium truncate">{act.title}</span>
                     </div>
 

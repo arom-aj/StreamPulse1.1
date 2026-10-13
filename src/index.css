@@ -6,14 +6,14 @@
   .dark {
     --bg-canvas: #161514;
     --bg-surface: #1E1D1B;
-    --bg-surface-elevated: #252321;
-    --bg-surface-hover: #2C2A27;
+    --bg-surface-elevated: #262421;
+    --bg-surface-hover: #2E2B28;
     --border-subtle: rgba(245, 240, 230, 0.07);
-    --border-default: rgba(245, 240, 230, 0.13);
-    --border-strong: rgba(245, 240, 230, 0.22);
-    --text-primary: #F4F1EA;
-    --text-secondary: #A39E93;
-    --text-muted: #736E65;
+    --border-default: rgba(245, 240, 230, 0.12);
+    --border-strong: rgba(245, 240, 230, 0.20);
+    --text-primary: #F5F2EB;
+    --text-secondary: #B8B2A7;
+    --text-muted: #8F897E;
     --accent: #E08A28;
     --accent-hover: #F59E0B;
     --accent-soft: rgba(224, 138, 40, 0.12);
@@ -26,14 +26,14 @@
   .light {
     --bg-canvas: #FAF8F3;
     --bg-surface: #F3EFE7;
-    --bg-surface-elevated: #ECE6DB;
-    --bg-surface-hover: #E3DCCF;
+    --bg-surface-elevated: #EBE5DA;
+    --bg-surface-hover: #E2DBD0;
     --border-subtle: rgba(45, 38, 30, 0.08);
     --border-default: rgba(45, 38, 30, 0.14);
-    --border-strong: rgba(45, 38, 30, 0.24);
+    --border-strong: rgba(45, 38, 30, 0.22);
     --text-primary: #23201C;
-    --text-secondary: #5C564E;
-    --text-muted: #8A8377;
+    --text-secondary: #524C44;
+    --text-muted: #6B645A;
     --accent: #B45309;
     --accent-hover: #92400E;
     --accent-soft: rgba(180, 83, 9, 0.1);
@@ -131,4 +131,16 @@
   background: var(--bg-surface-elevated);
   border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
+}
+
+/* Precision focus discipline - no browser-clipped outlines */
+:focus {
+  outline: none;
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 1px;
 }

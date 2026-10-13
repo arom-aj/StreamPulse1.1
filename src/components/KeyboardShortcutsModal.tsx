@@ -26,10 +26,10 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-fadeIn">
       <div className="fixed inset-0" onClick={onClose} />
 
-      <div className="relative w-full max-w-md bg-surface border border-subtle rounded-xl shadow-xl p-5 sm:p-6 z-10 text-primary transition-smooth">
+      <div className="relative w-full max-w-md bg-surface border border-subtle rounded-[10px] shadow-xl p-5 sm:p-6 z-10 text-primary transition-smooth">
         <div className="flex items-center justify-between pb-3 border-b border-subtle mb-4">
           <div className="flex items-center gap-2">
-            <Keyboard className="w-4 h-4 text-accent" />
+            <Keyboard className="w-4 h-4 text-secondary" />
             <h3 className="font-semibold text-sm tracking-tight text-primary">
               Atajos de Teclado
             </h3>

@@ -30,6 +30,7 @@ export default function App() {
   const [selectedPlatform, setSelectedPlatform] = useState<PlatformSlug | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [columns, setColumns] = useState<number>(3);
+  const [density, setDensity] = useState<'comfortable' | 'compact'>('comfortable');
 
   // Theme: Warm Graphite (dark) vs Warm Paper (light)
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
@@ -114,7 +115,7 @@ export default function App() {
         url: 'https://news.ycombinator.com',
         mediaType: 'article',
         authorName: 'Hacker News',
-        publishedAt: 'Reciente',
+        publishedAt: 'hace 1 min',
         readTimeMinutes: 3,
         isRead: false,
         isBookmarked: false,
@@ -282,7 +283,7 @@ export default function App() {
       mediaUrl: (isYt || isTwitchSource) ? parsedId : undefined,
       mediaType: isYt ? 'youtube_video' : isTwitchSource ? 'twitch_stream' : 'article',
       authorName: newSource.title,
-      publishedAt: 'Reciente',
+      publishedAt: 'hace 1 min',
       readTimeMinutes: 2,
       isRead: false,
       isBookmarked: false,
@@ -346,11 +347,11 @@ export default function App() {
       mediaUrl: cleanVideoId,
       mediaType: isTwitch ? 'twitch_stream' : 'youtube_video',
       authorName: videoData.authorName.trim() || (isTwitch ? cleanVideoId : 'YouTube'),
-      publishedAt: 'Reciente',
+      publishedAt: 'hace 1 min',
       readTimeMinutes: isTwitch ? 0 : 12,
       isRead: false,
       isBookmarked: false,
-      metrics: isTwitch ? { liveViewers: 'En Vivo' } : { views: 'Reciente', upvotes: 1 },
+      metrics: isTwitch ? { liveViewers: 'En Vivo' } : { views: '1.2K', upvotes: 1 },
       tags: ['Video']
     };
 
@@ -376,7 +377,7 @@ export default function App() {
       {/* Offline Status Warning Bar - Discreet unboxed notice */}
       {!isOnline && (
         <div className="bg-surface border-b border-subtle text-secondary text-xs font-mono py-1.5 px-4 flex items-center justify-center gap-2">
-          <WifiOff className="w-3.5 h-3.5 text-accent" />
+          <WifiOff className="w-3.5 h-3.5 text-secondary" />
           <span>Sin conexión · Navegando en modo lectura con caché local</span>
         </div>
       )}
@@ -392,6 +393,8 @@ export default function App() {
         onOpenAddSource={() => setIsAddSourceOpen(true)}
         columns={columns}
         onColumnsChange={setColumns}
+        density={density}
+        onDensityChange={setDensity}
         unreadTotal={unreadTotal}
         theme={theme}
         onToggleTheme={handleToggleTheme}
@@ -406,6 +409,8 @@ export default function App() {
           selectedPlatform={selectedPlatform}
           searchQuery={searchQuery}
           columns={columns}
+          density={density}
+          activeItemId={visibleItems[activeItemIndex]?.id}
           onPlayPiP={(item) => setPipItem(item)}
           onOpenReader={(item) => {
             setReaderItem(item);
@@ -420,12 +425,12 @@ export default function App() {
         />
       </main>
 
-      {/* MÓVIL (PWA): Bottom Navigation Bar in the thumb zone (max 4 destinations, >=44px) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md border-t border-subtle pb-[max(env(safe-area-inset-bottom),0.35rem)] pt-1 px-3 flex items-center justify-around text-xs font-medium transition-smooth">
+      {/* MÓVIL (PWA): Bottom Navigation Bar in the thumb zone (100% Opaque, >=44px) */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface border-t border-subtle pb-[max(env(safe-area-inset-bottom),0.35rem)] pt-1 px-3 flex items-center justify-around text-xs font-medium transition-smooth shadow-none">
         <button
           onClick={() => setSelectedPlatform('all')}
           className={`flex flex-col items-center justify-center gap-1 min-h-[44px] min-w-[56px] transition-smooth ${
-            selectedPlatform === 'all' ? 'text-accent' : 'text-muted'
+            selectedPlatform === 'all' ? 'text-primary font-medium' : 'text-muted'
           }`}
         >
           <Compass className="w-4 h-4 stroke-[1.75]" />
@@ -435,7 +440,7 @@ export default function App() {
         <button
           onClick={() => setSelectedPlatform('youtube')}
           className={`flex flex-col items-center justify-center gap-1 min-h-[44px] min-w-[56px] transition-smooth ${
-            selectedPlatform === 'youtube' ? 'text-accent' : 'text-muted'
+            selectedPlatform === 'youtube' ? 'text-primary font-medium' : 'text-muted'
           }`}
         >
           <Play className="w-4 h-4 stroke-[1.75]" />
@@ -445,7 +450,7 @@ export default function App() {
         <button
           onClick={() => setSelectedPlatform('rss')}
           className={`flex flex-col items-center justify-center gap-1 min-h-[44px] min-w-[56px] transition-smooth ${
-            selectedPlatform === 'rss' ? 'text-accent' : 'text-muted'
+            selectedPlatform === 'rss' ? 'text-primary font-medium' : 'text-muted'
           }`}
         >
           <BookOpen className="w-4 h-4 stroke-[1.75]" />
@@ -454,7 +459,7 @@ export default function App() {
 
         <button
           onClick={() => setIsAddSourceOpen(true)}
-          className="flex flex-col items-center justify-center gap-1 min-h-[44px] min-w-[56px] text-muted active:text-accent transition-smooth"
+          className="flex flex-col items-center justify-center gap-1 min-h-[44px] min-w-[56px] text-muted active:text-primary transition-smooth"
         >
           <Plus className="w-4 h-4 stroke-[2]" />
           <span className="text-[10px]">Agregar</span>

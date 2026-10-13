@@ -25,6 +25,7 @@ export const PiPPlayer: React.FC<PiPPlayerProps> = ({ item, onClose }) => {
 
   const isYouTube = item.platform === 'youtube' || item.mediaType === 'youtube_video';
   const isTwitch = item.platform === 'twitch' || item.mediaType === 'twitch_stream';
+  const isLive = Boolean(item.metrics?.liveViewers);
 
   let embedUrl = '';
   if (isYouTube) {
@@ -35,7 +36,7 @@ export const PiPPlayer: React.FC<PiPPlayerProps> = ({ item, onClose }) => {
 
   return (
     <div 
-      className={`fixed z-50 transition-smooth rounded-xl border border-subtle bg-surface shadow-md overflow-hidden group/pip ${
+      className={`fixed z-50 transition-smooth rounded-[10px] border border-subtle bg-surface shadow-lg overflow-hidden group/pip ${
         isAudioOnly || isMinimized
           ? 'bottom-3 left-3 right-3 sm:left-auto sm:right-5 sm:bottom-5 sm:w-72 h-13' 
           : isExpanded 
@@ -46,7 +47,7 @@ export const PiPPlayer: React.FC<PiPPlayerProps> = ({ item, onClose }) => {
       {/* Header Bar - Discreet, revealed on hover or tap */}
       <div className="flex items-center justify-between px-3 py-1.5 bg-surface border-b border-subtle select-none text-xs transition-smooth opacity-95 sm:opacity-80 sm:group-hover/pip:opacity-100">
         <div className="flex items-center gap-2 truncate mr-2 min-w-0">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+          <span className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-red-500 animate-pulse' : 'bg-secondary'} shrink-0`} />
           <span className="text-primary font-medium truncate text-[11px] sm:text-xs">
             {item.title}
           </span>
@@ -58,7 +59,7 @@ export const PiPPlayer: React.FC<PiPPlayerProps> = ({ item, onClose }) => {
           <button
             onClick={() => setIsAudioOnly(!isAudioOnly)}
             className={`p-1 rounded transition-smooth hover:bg-surface-elevated hover:text-primary ${
-              isAudioOnly ? 'text-accent' : ''
+              isAudioOnly ? 'text-primary' : ''
             }`}
             title={isAudioOnly ? "Ver video" : "Solo audio"}
           >
@@ -118,8 +119,8 @@ export const PiPPlayer: React.FC<PiPPlayerProps> = ({ item, onClose }) => {
         </div>
       ) : (
         <div className="flex items-center justify-between px-3 h-full text-xs font-mono">
-          <div className="flex items-center gap-2 text-accent min-w-0">
-            <Volume2 className="w-3.5 h-3.5 animate-pulse shrink-0" />
+          <div className="flex items-center gap-2 text-secondary min-w-0">
+            <Volume2 className="w-3.5 h-3.5 animate-pulse shrink-0 text-primary" />
             <span className="truncate text-secondary text-[11px]">
               {isAudioOnly ? 'Audio en segundo plano' : 'Minimizado'}
             </span>
@@ -129,7 +130,7 @@ export const PiPPlayer: React.FC<PiPPlayerProps> = ({ item, onClose }) => {
               setIsAudioOnly(false);
               setIsMinimized(false);
             }}
-            className="text-[11px] text-accent hover:underline shrink-0 ml-2"
+            className="text-[11px] text-primary hover:underline shrink-0 ml-2"
           >
             Ver video
           </button>

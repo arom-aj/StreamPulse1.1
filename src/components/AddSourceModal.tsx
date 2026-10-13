@@ -132,11 +132,11 @@ export const AddSourceModal: React.FC<AddSourceModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-3 sm:p-4 animate-fadeIn">
       <div className="fixed inset-0" onClick={onClose} />
 
-      <div className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto bg-surface border border-subtle rounded-xl shadow-xl p-5 sm:p-6 z-10 text-primary overscroll-contain transition-smooth">
+      <div className="relative w-full max-w-lg max-h-[92vh] overflow-y-auto bg-surface border border-subtle rounded-[10px] shadow-xl p-5 sm:p-6 z-10 text-primary overscroll-contain transition-smooth">
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-subtle mb-4">
           <div className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-lg bg-surface-elevated border border-subtle flex items-center justify-center text-accent shrink-0">
+            <div className="w-8 h-8 rounded-[8px] bg-surface-elevated border border-subtle flex items-center justify-center text-secondary shrink-0">
               <Compass className="w-4 h-4 stroke-[1.75]" />
             </div>
             <div className="min-w-0">
@@ -265,7 +265,7 @@ export const AddSourceModal: React.FC<AddSourceModalProps> = ({
                     className="w-full text-left p-1.5 rounded-md bg-surface-elevated hover:bg-surface-hover border border-subtle text-[11px] text-secondary hover:text-primary flex items-center justify-between transition-smooth"
                   >
                     <span className="truncate">{p.title}</span>
-                    <span className="text-[10px] text-accent font-mono shrink-0 ml-2">Cargar →</span>
+                    <span className="text-[10px] text-secondary group-hover:text-primary font-mono shrink-0 ml-2">Cargar →</span>
                   </button>
                 ))}
               </div>
@@ -274,7 +274,7 @@ export const AddSourceModal: React.FC<AddSourceModalProps> = ({
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full py-2.5 rounded-lg bg-accent text-[var(--accent-contrast)] hover:opacity-90 font-medium transition-smooth shadow-xs flex items-center justify-center gap-2"
+                className="w-full py-2.5 rounded-[8px] bg-primary text-[var(--bg-canvas)] hover:opacity-90 font-medium transition-smooth shadow-none flex items-center justify-center gap-2"
               >
                 <Play className="w-3.5 h-3.5 fill-current" />
                 <span>Agregar Video al Feed & PiP</span>
@@ -373,7 +373,7 @@ export const AddSourceModal: React.FC<AddSourceModalProps> = ({
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full py-2.5 rounded-lg bg-accent text-[var(--accent-contrast)] hover:opacity-90 font-medium transition-smooth shadow-xs"
+                className="w-full py-2.5 rounded-[8px] bg-primary text-[var(--bg-canvas)] hover:opacity-90 font-medium transition-smooth shadow-none"
               >
                 Conectar Fuente
               </button>

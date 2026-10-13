@@ -150,7 +150,7 @@ export const INITIAL_FEED_ITEMS: FeedItem[] = [
     mediaType: 'youtube_video',
     authorName: 'Laravel Daily',
     authorAvatar: 'https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=100&auto=format&fit=crop&q=60',
-    publishedAt: 'Hace 25 min',
+    publishedAt: 'hace 25 min',
     readTimeMinutes: 14,
     isRead: false,
     isBookmarked: true,
@@ -182,7 +182,7 @@ export const INITIAL_FEED_ITEMS: FeedItem[] = [
     url: 'https://news.ycombinator.com/item?id=39882104',
     mediaType: 'article',
     authorName: 'dang',
-    publishedAt: 'Hace 42 min',
+    publishedAt: 'hace 42 min',
     readTimeMinutes: 5,
     isRead: false,
     isBookmarked: false,
@@ -213,10 +213,10 @@ export const INITIAL_FEED_ITEMS: FeedItem[] = [
     url: 'https://reddit.com/r/programming/comments/1bp6z7',
     mediaType: 'article',
     authorName: 'u/fullstack_architect',
-    publishedAt: 'Hace 1 hora',
+    publishedAt: 'hace 1 h',
     readTimeMinutes: 6,
     isRead: true,
-    isBookmarked: true,
+    isBookmarked: false,
     metrics: {
       upvotes: 890,
       comments: 245
@@ -244,7 +244,7 @@ export const INITIAL_FEED_ITEMS: FeedItem[] = [
     mediaType: 'code',
     authorName: 'calebporzio',
     authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=60',
-    publishedAt: 'Hace 2 horas',
+    publishedAt: 'hace 2 h',
     readTimeMinutes: 3,
     isRead: false,
     isBookmarked: false,
@@ -276,7 +276,7 @@ export const INITIAL_FEED_ITEMS: FeedItem[] = [
     mediaUrl: 'theprimeagen',
     mediaType: 'twitch_stream',
     authorName: 'ThePrimeagen',
-    publishedAt: 'En directo ahora',
+    publishedAt: 'hace 20 min',
     readTimeMinutes: 0,
     isRead: false,
     isBookmarked: false,
@@ -302,7 +302,7 @@ export const INITIAL_FEED_ITEMS: FeedItem[] = [
     mediaUrl: 'L_LUpnjgPso',
     mediaType: 'youtube_video',
     authorName: 'Laravel Daily',
-    publishedAt: 'Hace 5 horas',
+    publishedAt: 'hace 5 h',
     readTimeMinutes: 18,
     isRead: true,
     isBookmarked: false,
@@ -312,6 +312,176 @@ export const INITIAL_FEED_ITEMS: FeedItem[] = [
       comments: 45
     },
     tags: ['Laravel Horizon', 'Queues', 'Redis', 'DevOps']
+  },
+  {
+    id: 'item-yt-3',
+    sourceId: 'src-yt-1',
+    platform: 'youtube',
+    externalId: 'dQw4w9WgXcQ',
+    title: 'Migraciones Zero-Downtime y Particionamiento en PostgreSQL',
+    summary: 'Estrategias para alterar tablas de más de 50 millones de filas sin bloquear escrituras ni degradar el pool de conexiones.',
+    contentCleanHtml: `
+      <h2>Zero-Downtime Migrations</h2>
+      <p>Aprende a ejecutar operaciones DDL seguras usando bloqueos transaccionales breves y triggers de replicación gradual.</p>
+    `,
+    url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    mediaUrl: 'dQw4w9WgXcQ',
+    mediaType: 'youtube_video',
+    authorName: 'Aaron Francis',
+    publishedAt: 'hace 8 h',
+    readTimeMinutes: 15,
+    isRead: false,
+    isBookmarked: false,
+    metrics: {
+      views: '5.1K',
+      upvotes: 480
+    },
+    tags: ['PostgreSQL', 'Databases', 'Performance']
+  },
+  {
+    id: 'item-rss-2',
+    sourceId: 'src-rss-hn',
+    platform: 'rss',
+    externalId: 'hn-39884512',
+    title: 'SQLite en Producción: Lecciones de 10 Millones de Consultas Diarias',
+    summary: 'Por qué muchas aplicaciones web modernas rinden significativamente mejor con SQLite embebido en NVMe local que con clusters de red.',
+    contentCleanHtml: `
+      <h2>El Renacimiento de SQLite</h2>
+      <p>La latencia de red suele ser el principal factor de demora en microservicios. Almacenar datos en el mismo nodo físico elimina el handshake de socket.</p>
+    `,
+    url: 'https://fly.io/blog/all-in-on-sqlite',
+    mediaType: 'article',
+    authorName: 'Fly.io Tech Blog',
+    publishedAt: 'hace 1 h',
+    readTimeMinutes: 6,
+    isRead: false,
+    isBookmarked: false,
+    metrics: {
+      upvotes: 532,
+      comments: 184
+    },
+    tags: ['SQLite', 'Architecture', 'Storage']
+  },
+  {
+    id: 'item-rss-3',
+    sourceId: 'src-rss-hn',
+    platform: 'rss',
+    externalId: 'hn-39887100',
+    title: 'Diseño de Interfaces Tranquilas: Menos Notificaciones y Cero Métricas de Vanidad',
+    summary: 'Principios de diseño para herramientas de información que respetan la atención del lector en lugar de competir por dopamina.',
+    contentCleanHtml: `
+      <h2>La Filosofía de las Herramientas Tranquilas</h2>
+      <p>Una herramienta debe responder con precisión, sin animaciones innecesarias ni elementos que compitan por la mirada.</p>
+    `,
+    url: 'https://news.ycombinator.com',
+    mediaType: 'article',
+    authorName: 'Substack Dev',
+    publishedAt: 'hace 4 h',
+    readTimeMinutes: 4,
+    isRead: true,
+    isBookmarked: true,
+    metrics: {
+      upvotes: 310,
+      comments: 67
+    },
+    tags: ['UX', 'Editorial', 'Productivity']
+  },
+  {
+    id: 'item-reddit-2',
+    sourceId: 'src-reddit-1',
+    platform: 'reddit',
+    externalId: 'reddit-t3_2cp89a',
+    title: 'Arquitecturas Monolíticas Modulares: ¿Cuándo dejar de dividir en microservicios?',
+    summary: 'Reflexión en r/programming sobre los costes ocultos de orquestación, contratos de red y depuración entre servicios distribuidos.',
+    contentCleanHtml: `
+      <h2>Monolitos Modulares</h2>
+      <p>La modularidad a nivel de paquetes de código proporciona aislamiento sin el peaje de red ni la complejidad de Kubernetes.</p>
+    `,
+    url: 'https://reddit.com/r/programming',
+    mediaType: 'article',
+    authorName: 'u/system_craft',
+    publishedAt: 'hace 2 h',
+    readTimeMinutes: 5,
+    isRead: false,
+    isBookmarked: false,
+    metrics: {
+      upvotes: 640,
+      comments: 198
+    },
+    tags: ['Architecture', 'DevOps', 'Microservices']
+  },
+  {
+    id: 'item-reddit-3',
+    sourceId: 'src-reddit-1',
+    platform: 'reddit',
+    externalId: 'reddit-t3_3dp91c',
+    title: 'Comparativa de consumo de memoria y concurrencia entre Node 22 y PHP 8.3 JIT',
+    summary: 'Análisis independiente con cargas reales de ingestión de JSON y serialización en buffers de alto volumen.',
+    contentCleanHtml: `
+      <h2>Benchmarks de Concurrencia</h2>
+      <p>Resultados detallados sobre uso de RSS memory y latencia en el percentil 99.</p>
+    `,
+    url: 'https://reddit.com/r/programming',
+    mediaType: 'article',
+    authorName: 'u/benchmark_geek',
+    publishedAt: 'hace 6 h',
+    readTimeMinutes: 7,
+    isRead: true,
+    isBookmarked: false,
+    metrics: {
+      upvotes: 420,
+      comments: 112
+    },
+    tags: ['Performance', 'Benchmarks', 'NodeJS', 'PHP']
+  },
+  {
+    id: 'item-gh-2',
+    sourceId: 'src-github-1',
+    platform: 'github',
+    externalId: 'gh-shadcn-ui-v2',
+    title: 'shadcn/ui v2.1: Soporte completo para Tailwind v4 y variables CSS nativas',
+    summary: 'Nueva release optimizada para bundlers modernos, reduciendo el bundle de utilidades a cero código JavaScript extra.',
+    contentCleanHtml: `
+      <h2>Changelog shadcn/ui v2.1</h2>
+      <p>Compatibilidad directa con <code>@import "tailwindcss"</code> y paletas de color con variables dinámicas.</p>
+    `,
+    url: 'https://github.com/shadcn-ui/ui/releases',
+    mediaType: 'code',
+    authorName: 'shadcn',
+    publishedAt: 'hace 50 min',
+    readTimeMinutes: 2,
+    isRead: false,
+    isBookmarked: false,
+    metrics: {
+      stars: 64200,
+      forks: 5100
+    },
+    tags: ['GitHub', 'Release', 'Frontend']
+  },
+  {
+    id: 'item-twitch-2',
+    sourceId: 'src-twitch-1',
+    platform: 'twitch',
+    externalId: 'twitch-stream-tsoding',
+    title: 'EN VIVO: Programando un motor de feeds ultraliviano en Rust y WebAssembly',
+    summary: 'Desarrollo interactivo en vivo: parsing de XML a 1 GB/segundo sin allocations en el heap principal.',
+    contentCleanHtml: `
+      <h2>Desarrollo en Vivo con Rust</h2>
+      <p>Explorando arquitecturas de cero copias para procesamiento de flujos de texto en tiempo real.</p>
+    `,
+    url: 'https://twitch.tv/tsoding',
+    mediaUrl: 'tsoding',
+    mediaType: 'twitch_stream',
+    authorName: 'Tsoding',
+    publishedAt: 'hace 15 min',
+    readTimeMinutes: 0,
+    isRead: false,
+    isBookmarked: false,
+    metrics: {
+      liveViewers: '2.4K',
+      language: 'English'
+    },
+    tags: ['Twitch', 'Live', 'Rust', 'Wasm']
   }
 ];
 

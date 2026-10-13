@@ -122,7 +122,7 @@ export const CleanReaderModal: React.FC<CleanReaderModalProps> = ({
             <button
               onClick={() => onToggleBookmark(item.id)}
               className={`p-1.5 rounded transition-smooth hover:bg-surface-elevated ${
-                item.isBookmarked ? 'text-accent' : 'text-muted hover:text-secondary'
+                item.isBookmarked ? 'text-primary' : 'text-muted hover:text-secondary'
               }`}
               title={item.isBookmarked ? "Guardado" : "Guardar para después"}
             >
@@ -135,7 +135,7 @@ export const CleanReaderModal: React.FC<CleanReaderModalProps> = ({
               className="p-1.5 rounded text-muted hover:text-primary transition-smooth hover:bg-surface-elevated"
               title="Copiar enlace"
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-accent" /> : <Share2 className="w-3.5 h-3.5" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-primary" /> : <Share2 className="w-3.5 h-3.5" />}
             </button>
 
             {/* Open Original */}
