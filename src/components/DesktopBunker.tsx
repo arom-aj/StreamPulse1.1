@@ -112,10 +112,6 @@ export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
             </>
           )}
         </div>
-
-        <div className="hidden sm:flex items-center gap-2 text-muted/70 text-[10px]">
-          <span>J/K navegar · Enter abrir · S sincronizar</span>
-        </div>
       </div>
 
       {/* Grid of Modular Widgets with Focal Anchor & Dense Flow to eliminate gaps */}
@@ -174,8 +170,8 @@ export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
         </div>
       )}
 
-      {/* Footnote Shortcuts Bar preserved at the bottom */}
-      <div className="pt-6 pb-2 text-center text-[11px] font-mono text-muted flex items-center justify-center gap-3 sm:gap-4 select-none">
+      {/* Footnote Shortcuts Bar - Desktop only, hidden on touch screens via media query */}
+      <div className="touch-hide pt-6 pb-2 text-center text-[11px] font-mono text-muted flex items-center justify-center gap-3 sm:gap-4 select-none">
         <span><kbd className="kbd-tag">J/K</kbd> navegar</span>
         <span>·</span>
         <span><kbd className="kbd-tag">↵</kbd> abrir</span>

@@ -93,8 +93,8 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="truncate hidden sm:inline">Buscar publicaciones o acciones...</span>
               <span className="truncate sm:hidden">Buscar...</span>
             </div>
-            <div className="flex items-center gap-1 shrink-0 ml-1">
-              <span className="kbd-tag hidden sm:inline-block">⌘K</span>
+            <div className="touch-hide flex items-center gap-1 shrink-0 ml-1">
+              <span className="kbd-tag">⌘K</span>
             </div>
           </button>
         </div>
@@ -106,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={onSync}
             disabled={isSyncing}
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] text-xs font-mono border border-subtle transition-smooth bg-surface-elevated hover:bg-surface-hover text-secondary outline-none"
-            title="Sincronizar feeds (S)"
+            title="Sincronizar feeds"
           >
             <RefreshCw className={`w-3.5 h-3.5 shrink-0 ${isSyncing ? 'animate-spin text-primary' : 'text-muted'}`} />
             <span className="hidden md:inline">{isSyncing ? 'Actualizando' : 'Sync'}</span>
@@ -218,13 +218,13 @@ export const Header: React.FC<HeaderProps> = ({
                   </button>
                 </div>
 
-                {/* Keyboard Shortcuts entry (Eliminated keyboard icon from header, placed inside Vista menu) */}
+                {/* Keyboard Shortcuts entry (Desktop only, hidden on touch screens via media query) */}
                 <button
                   onClick={() => {
                     setIsViewMenuOpen(false);
                     onOpenShortcuts();
                   }}
-                  className="w-full text-left px-2 py-1.5 rounded-[8px] text-secondary hover:text-primary hover:bg-surface-elevated transition-smooth flex items-center justify-between"
+                  className="touch-hide w-full text-left px-2 py-1.5 rounded-[8px] text-secondary hover:text-primary hover:bg-surface-elevated transition-smooth flex items-center justify-between"
                 >
                   <span>Atajos de teclado</span>
                   <span className="kbd-tag">?</span>

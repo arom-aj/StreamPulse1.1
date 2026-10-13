@@ -122,7 +122,7 @@ export const WidgetCard: React.FC<WidgetCardProps> = ({
                   key={item.id}
                   className={`group/item p-2.5 rounded-[8px] transition-smooth flex flex-col justify-between gap-1.5 outline-none relative select-none ${
                     isFocused
-                      ? 'bg-surface-elevated before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[3px] before:bg-accent before:rounded-full'
+                      ? 'bg-surface-elevated item-focus-indicator before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:bg-accent before:rounded-r'
                       : 'hover:bg-surface-elevated/60'
                   }`}
                 >

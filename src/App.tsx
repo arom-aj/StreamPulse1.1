@@ -400,8 +400,8 @@ export default function App() {
         onToggleTheme={handleToggleTheme}
       />
 
-      {/* Main Content Area - Modular Grid */}
-      <main className="flex-1">
+      {/* Main Content Area - Modular Grid with safe area padding */}
+      <main className="flex-1 pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:pb-4">
         <DesktopBunker
           sources={sources}
           items={items}

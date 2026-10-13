@@ -135,7 +135,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             >
               <X className="w-4 h-4" />
             </button>
-            <span className="hidden sm:inline-block kbd-tag">ESC</span>
+            <span className="touch-hide hidden sm:inline-block kbd-tag">ESC</span>
           </div>
         </div>
 
@@ -212,11 +212,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
         {/* Minimal Footer Helper */}
         <div className="px-4 py-2 bg-surface-elevated border-t border-subtle flex items-center justify-between text-[11px] text-muted font-mono">
-          <div className="flex items-center gap-3">
+          <div className="touch-hide flex items-center gap-3">
             <span><kbd className="kbd-tag">↑</kbd> <kbd className="kbd-tag">↓</kbd> o <kbd className="kbd-tag">Ctrl+J/K</kbd></span>
             <span><kbd className="kbd-tag">↵</kbd> abrir</span>
           </div>
-          <span>Paleta de comandos</span>
+          <span className="w-full sm:w-auto text-center sm:text-right">Paleta de comandos</span>
         </div>
       </div>
     </div>

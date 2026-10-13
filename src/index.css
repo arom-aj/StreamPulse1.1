@@ -133,14 +133,44 @@
   color: var(--text-secondary);
 }
 
-/* Precision focus discipline - no browser-clipped outlines */
+/* Precision focus discipline - no browser-clipped outlines or white borders */
 :focus {
-  outline: none;
+  outline: none !important;
 }
 
-button:focus-visible,
-input:focus-visible,
-a:focus-visible {
-  outline: 1.5px solid var(--accent);
-  outline-offset: 1px;
+*:focus,
+*:focus-visible {
+  outline: none !important;
+}
+
+/* Subtle focus ring only for real keyboard navigation on desktop */
+@media (pointer: fine) and (hover: hover) {
+  input:focus-visible {
+    outline: 1.5px solid var(--accent) !important;
+    outline-offset: 1px;
+  }
+}
+
+/* Touch devices (phones, tablets, touchscreens): 
+   Hide all visual keyboard shortcut indicators and eliminate any tap/focus rings */
+@media (pointer: coarse), (hover: none) {
+  *,
+  *:focus,
+  *:focus-visible,
+  *:active,
+  *:visited {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+
+  /* Hide shortcut hints, badges, and footnote bars on touch devices */
+  .touch-hide {
+    display: none !important;
+  }
+
+  /* Do not display keyboard accent bar on touch devices */
+  .item-focus-indicator::before {
+    display: none !important;
+  }
 }
