@@ -45,9 +45,9 @@ export const WidgetCard: React.FC<WidgetCardProps> = ({
   const unreadCount = items.filter(i => !i.isRead).length;
 
   return (
-    <div className="rounded-[10px] bg-surface border border-subtle/30 shadow-none flex flex-col transition-smooth group/card overflow-hidden select-none">
+    <div className="widget-card flex flex-col group/card overflow-hidden select-none">
       {/* Widget Header: Title and unread count ALWAYS visible; actions appear only on hover */}
-      <div className="flex items-center justify-between px-3.5 py-2.5 bg-surface border-b border-subtle/40 select-none">
+      <div className="widget-header flex items-center justify-between px-3.5 py-2.5 bg-surface select-none">
         <div className="flex items-center gap-2 min-w-0">
           {/* Drag Handle: ONLY on hover, subtle */}
           <GripVertical className="w-3.5 h-3.5 text-muted opacity-0 group-hover/card:opacity-100 cursor-grab shrink-0 transition-opacity duration-150 hidden sm:block -ml-1" />
@@ -122,7 +122,7 @@ export const WidgetCard: React.FC<WidgetCardProps> = ({
                   key={item.id}
                   className={`group/item p-2.5 rounded-[8px] transition-smooth flex flex-col justify-between gap-1.5 outline-none relative select-none ${
                     isFocused
-                      ? 'bg-surface-elevated item-focus-indicator before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2.5px] before:bg-accent before:rounded-r'
+                      ? 'bg-surface-elevated item-focus-indicator before:absolute before:left-0 before:top-1.5 before:bottom-1.5 before:w-[2px] before:bg-accent before:rounded-r'
                       : 'hover:bg-surface-elevated/60'
                   }`}
                 >

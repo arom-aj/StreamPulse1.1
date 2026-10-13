@@ -92,7 +92,7 @@ export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
   }, [visibleWidgets, focalWidgetId, selectedPlatform]);
 
   return (
-    <div className="max-w-[1600px] mx-auto px-3.5 sm:px-6 py-4 space-y-3.5">
+    <div className="max-w-[1600px] mx-auto px-3.5 sm:px-6 pt-2.5 pb-2 space-y-3.5">
       {/* Discreet single status line: N sin leer · N guardados · Marcar leídos (sin franja Reciente) */}
       <div className="flex items-center justify-between text-xs text-muted border-b border-subtle pb-2.5 font-mono text-[11px] select-none">
         <div className="flex items-center gap-2">
@@ -105,7 +105,7 @@ export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
               <button
                 onClick={onMarkAllRead}
                 className="text-muted hover:text-secondary hover:underline transition-smooth cursor-pointer outline-none"
-                title="Marcar todas como leídas (R)"
+                title="Marcar todas como leídas"
               >
                 Marcar leídos
               </button>
@@ -157,7 +157,7 @@ export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
 
       {/* Clean Empty State */}
       {arrangedWidgets.length > 0 && filteredItems.length === 0 && (
-        <div className="py-20 text-center flex flex-col items-center justify-center bg-surface border border-subtle/40 rounded-[10px] p-8 max-w-md mx-auto">
+        <div className="py-20 text-center flex flex-col items-center justify-center bg-surface border border-subtle rounded-[10px] p-8 max-w-md mx-auto">
           <div className="w-10 h-10 rounded-[8px] bg-surface-elevated border border-subtle flex items-center justify-center text-muted mb-3">
             <SearchX className="w-5 h-5 stroke-[1.5]" />
           </div>
@@ -169,19 +169,6 @@ export const DesktopBunker: React.FC<DesktopBunkerProps> = ({
           </p>
         </div>
       )}
-
-      {/* Footnote Shortcuts Bar - Desktop only, hidden on touch screens via media query */}
-      <div className="touch-hide pt-6 pb-2 text-center text-[11px] font-mono text-muted flex items-center justify-center gap-3 sm:gap-4 select-none">
-        <span><kbd className="kbd-tag">J/K</kbd> navegar</span>
-        <span>·</span>
-        <span><kbd className="kbd-tag">↵</kbd> abrir</span>
-        <span>·</span>
-        <span><kbd className="kbd-tag">S</kbd> sync</span>
-        <span>·</span>
-        <span><kbd className="kbd-tag">R</kbd> leer</span>
-        <span>·</span>
-        <span><kbd className="kbd-tag">⌘K</kbd> buscar</span>
-      </div>
     </div>
   );
 };

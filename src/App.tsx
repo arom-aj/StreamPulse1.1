@@ -401,7 +401,7 @@ export default function App() {
       />
 
       {/* Main Content Area - Modular Grid with safe area padding */}
-      <main className="flex-1 pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:pb-4">
+      <main className="flex-1 pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:pb-2">
         <DesktopBunker
           sources={sources}
           items={items}

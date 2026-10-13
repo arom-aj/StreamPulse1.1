@@ -4,13 +4,15 @@
   /* Warm Graphite (Dark mode - Primary) */
   :root,
   .dark {
-    --bg-canvas: #161514;
+    --bg-canvas: #151413;
     --bg-surface: #1E1D1B;
     --bg-surface-elevated: #262421;
-    --bg-surface-hover: #2E2B28;
-    --border-subtle: rgba(245, 240, 230, 0.07);
-    --border-default: rgba(245, 240, 230, 0.12);
-    --border-strong: rgba(245, 240, 230, 0.20);
+    --bg-surface-hover: #2C2A27;
+    --border-widget: rgba(255, 255, 255, 0.06);
+    --border-widget-hover: rgba(255, 255, 255, 0.10);
+    --border-subtle: rgba(255, 255, 255, 0.06);
+    --border-default: rgba(255, 255, 255, 0.10);
+    --border-strong: rgba(255, 255, 255, 0.16);
     --text-primary: #F5F2EB;
     --text-secondary: #B8B2A7;
     --text-muted: #8F897E;
@@ -18,19 +20,21 @@
     --accent-hover: #F59E0B;
     --accent-soft: rgba(224, 138, 40, 0.12);
     --accent-border: rgba(224, 138, 40, 0.3);
-    --accent-contrast: #161514;
+    --accent-contrast: #151413;
     color-scheme: dark;
   }
 
   /* Warm Paper (Light mode) */
   .light {
-    --bg-canvas: #FAF8F3;
-    --bg-surface: #F3EFE7;
-    --bg-surface-elevated: #EBE5DA;
-    --bg-surface-hover: #E2DBD0;
-    --border-subtle: rgba(45, 38, 30, 0.08);
-    --border-default: rgba(45, 38, 30, 0.14);
-    --border-strong: rgba(45, 38, 30, 0.22);
+    --bg-canvas: #F4F0E6;
+    --bg-surface: #FFFFFF;
+    --bg-surface-elevated: #F2EFE7;
+    --bg-surface-hover: #EBE6DC;
+    --border-widget: rgba(0, 0, 0, 0.08);
+    --border-widget-hover: rgba(0, 0, 0, 0.12);
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-default: rgba(0, 0, 0, 0.12);
+    --border-strong: rgba(0, 0, 0, 0.18);
     --text-primary: #23201C;
     --text-secondary: #524C44;
     --text-muted: #6B645A;
@@ -38,7 +42,7 @@
     --accent-hover: #92400E;
     --accent-soft: rgba(180, 83, 9, 0.1);
     --accent-border: rgba(180, 83, 9, 0.25);
-    --accent-contrast: #FAF8F3;
+    --accent-contrast: #FFFFFF;
     color-scheme: light;
   }
 
@@ -66,15 +70,47 @@
   }
 }
 
+/* Universal border color reset - never fall back to white/gray */
+*, ::before, ::after {
+  border-color: var(--border-subtle);
+}
+
 /* Color utility classes mapped to CSS variables */
 .bg-canvas { background-color: var(--bg-canvas); }
 .bg-surface { background-color: var(--bg-surface); }
 .bg-surface-elevated { background-color: var(--bg-surface-elevated); }
 .bg-surface-hover { background-color: var(--bg-surface-hover); }
 
+.border-widget { border-color: var(--border-widget); }
 .border-subtle { border-color: var(--border-subtle); }
 .border-default { border-color: var(--border-default); }
 .border-strong { border-color: var(--border-strong); }
+
+/* Widget Container: 1px subtle border, tone lighter than canvas, no white ring/outline */
+.widget-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-widget);
+  border-radius: 10px;
+  outline: none !important;
+  box-shadow: none !important;
+  transition: border-color 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.widget-card:hover {
+  border-color: var(--border-widget-hover);
+}
+
+.widget-card:focus,
+.widget-card:focus-within,
+.widget-card:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--border-widget);
+}
+
+.widget-header {
+  border-bottom: 1px solid var(--border-widget);
+}
 
 .text-primary { color: var(--text-primary); }
 .text-secondary { color: var(--text-secondary); }

@@ -86,15 +86,12 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex-1 max-w-md mx-1 sm:mx-4 min-w-0">
           <button
             onClick={onOpenCommandPalette}
-            className="w-full flex items-center justify-between bg-surface-elevated hover:bg-surface-hover border border-subtle rounded-[8px] px-3 py-1.5 text-xs text-secondary transition-smooth group outline-none"
+            className="w-full flex items-center bg-surface-elevated hover:bg-surface-hover border border-subtle rounded-[8px] px-3 py-1.5 text-xs text-secondary transition-smooth group outline-none"
           >
             <div className="flex items-center gap-2.5 truncate">
               <Search className="w-3.5 h-3.5 text-muted group-hover:text-primary transition-smooth shrink-0" />
               <span className="truncate hidden sm:inline">Buscar publicaciones o acciones...</span>
               <span className="truncate sm:hidden">Buscar...</span>
-            </div>
-            <div className="touch-hide flex items-center gap-1 shrink-0 ml-1">
-              <span className="kbd-tag">⌘K</span>
             </div>
           </button>
         </div>
